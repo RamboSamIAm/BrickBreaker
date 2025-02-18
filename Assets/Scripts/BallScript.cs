@@ -8,6 +8,7 @@ public class BallScript : MonoBehaviour
 
     [SerializeField] protected float worldVelocity = 25;
     [SerializeField] protected Vector3 startForce = Vector3.one;
+    [SerializeField] protected int dammage = 1;
 
     
 
@@ -38,5 +39,14 @@ public class BallScript : MonoBehaviour
         nV3.z = 0;
 
         rb.velocity = nV3;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        BreakableBrick bb = collision.gameObject.GetComponent<BreakableBrick>();
+        if (bb != null)
+        {
+            bb.Break(dammage);
+        }
     }
 }
